@@ -11,7 +11,7 @@ fn main() {
                 handle_connection(stream);
             }
             Err(_) => {
-                println!("Error getting stream");
+                println!("Error getting stream!");
             }
         }
     }
@@ -31,6 +31,7 @@ fn handle_connection(mut stream: TcpStream) {
                     stream.write(empty_msg.as_bytes()).unwrap();
                     break;
                 }
+                println!("Received: {}", std::str::from_utf8(&buffer).unwrap());
                 stream.write(&buffer[0..n]).unwrap();
                 stream.flush().unwrap();
             }
